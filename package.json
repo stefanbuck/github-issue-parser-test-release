@@ -1,5 +1,5 @@
 {
-  "name": "github-issue-parser",
+  "name": "github-issue-parser-test-release",
   "private": true,
   "version": "1.0.0",
   "description": "",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stefanbuck/github-issue-parser.git"
+    "url": "git+https://github.com/stefanbuck/github-issue-parser-test-release.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/stefanbuck/github-issue-parser/issues"
+    "url": "https://github.com/stefanbuck/github-issue-parser-test-release/issues"
   },
-  "homepage": "https://github.com/stefanbuck/github-issue-parser#readme",
+  "homepage": "https://github.com/stefanbuck/github-issue-parser-test-release#readme",
   "dependencies": {
     "@actions/core": "^1.11.1",
     "js-yaml": "^4.0.0"
@@ -29,7 +29,25 @@
   },
   "release": {
     "branches": [
+      "+([0-9]).x",
       "main"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/github",
+      "@semantic-release/npm",
+      "semantic-release-plugin-github-breaking-version-tag",
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "package.json",
+            "dist/*"
+          ],
+          "message": "build(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ]
     ]
   }
 }
